@@ -8,7 +8,7 @@
 	<parent>
 		<groupId>org.ogc-schemas</groupId>
 		<artifactId>ogc-schemas-project</artifactId>
-		<version>4.0.0</version>
+		<version>4.1.0-SNAPSHOT</version>
 	</parent>
 	<modules>
 		<module>gmi</module>
