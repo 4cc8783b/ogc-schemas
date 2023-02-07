@@ -1,0 +1,4 @@
+*.js
+!CSW_2_0_2_Full.js
+!CSW_2_0_2_OWS_1_0_0.js
+!Filter_1_1_0_GML_3_1_1.js
