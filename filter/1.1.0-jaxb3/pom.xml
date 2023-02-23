@@ -2,9 +2,9 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<artifactId>gml-v_2_1_2</artifactId>
+	<artifactId>jaxb3.filter-v_1_1_0</artifactId>
 	<packaging>jar</packaging>
-	<name>OGC GML 2.1.2</name>
+	<name>OGC Filter 1.1.0 JAXB3</name>
 	<parent>
 		<groupId>org.ogc-schemas</groupId>
 		<artifactId>ogc-schema-parent</artifactId>
@@ -14,12 +14,27 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.w3c-schemas</groupId>
-			<artifactId>xlink-v_1_0</artifactId>
+			<artifactId>jaxb3.xlink-v_1_0</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>javax.xml.bind</groupId>
-			<artifactId>jaxb-api</artifactId>
+			<groupId>jakarta.xml.bind</groupId>
+			<artifactId>jakarta.xml.bind-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>jaxb3.gml-v_3_1_1</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>net.mcbluna.jaxb3_commons</groupId>
+			<artifactId>jaxb3-basics</artifactId>
 			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.glassfish.jaxb</groupId>
+			<artifactId>jaxb-runtime</artifactId>
+			<version>4.0.2</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 	<build>
@@ -31,18 +46,18 @@
 				<configuration>
 					<archive>
 						<manifestEntries>
-							<Automatic-Module-Name>org.ogc_schemas.gml.v_2_1_2</Automatic-Module-Name>
+							<Automatic-Module-Name>org.ogc_schemas.filter.v_1_1_0</Automatic-Module-Name>
 						</manifestEntries>
 					</archive>
 				</configuration>
 			</plugin>
 			<plugin>
-				<groupId>org.jvnet.jaxb2.maven2</groupId>
-				<artifactId>maven-jaxb2-plugin</artifactId>
+				<groupId>com.helger.maven</groupId>
+				<artifactId>jaxb30-maven-plugin</artifactId>
 				<configuration>
 					<schemas>
 						<schema>
-							<url>http://schemas.opengis.net/gml/2.1.2/gml.xsd</url>
+							<url>http://schemas.opengis.net/filter/1.1.0/filterAll.xsd</url>
 						</schema>
 					</schemas>
 					<bindings>
@@ -50,27 +65,12 @@
 							<dependencyResource>
 								<groupId>${project.groupId}</groupId>
 								<artifactId>ogc-schemas</artifactId>
-								<resource>ogc/globalBindings.xjb</resource>
+								<resource>ogc/globalBindings.jaxb3.xjb</resource>
 								<version>${project.version}</version>
-							</dependencyResource>
-						</binding>
-						<binding>
-							<dependencyResource>
-								<groupId>org.w3c-schemas</groupId>
-								<artifactId>xlink-v_1_0</artifactId>
-								<resource>xlink-v_1_0.jsonix.xjb</resource>
-								<version>${w3c-schemas.version}</version>
 							</dependencyResource>
 						</binding>
 					</bindings>
 				</configuration>
-			</plugin>
-			<plugin>
-				<artifactId>maven-antrun-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>build-helper-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
 	</build>
