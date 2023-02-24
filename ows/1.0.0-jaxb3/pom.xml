@@ -58,6 +58,20 @@
 					</schemas>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>attach-scripts</id>
+						<phase>none</phase>
+					</execution>
+					<execution>
+						<id>attach-jsonschemas</id>
+						<phase>none</phase>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 </project>

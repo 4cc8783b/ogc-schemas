@@ -2,9 +2,9 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<artifactId>jaxb3.filter-v_1_1_0</artifactId>
+	<artifactId>jaxb3.wfs-v_1_1_0</artifactId>
 	<packaging>jar</packaging>
-	<name>OGC Filter 1.1.0 JAXB3</name>
+	<name>OGC WFS 1.1.0 JAXB3</name>
 	<parent>
 		<groupId>org.ogc-schemas</groupId>
 		<artifactId>ogc-schema-parent</artifactId>
@@ -17,24 +17,19 @@
 			<artifactId>jaxb3.xlink-v_1_0</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>jakarta.xml.bind</groupId>
-			<artifactId>jakarta.xml.bind-api</artifactId>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>jaxb3.ows-v_1_0_0</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>jaxb3.filter-v_1_1_0</artifactId>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>jaxb3.gml-v_3_1_1</artifactId>
 			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>net.mcbluna.jaxb3_commons</groupId>
-			<artifactId>jaxb3-basics</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.glassfish.jaxb</groupId>
-			<artifactId>jaxb-runtime</artifactId>
-			<version>4.0.2</version>
-			<scope>test</scope>
 		</dependency>
 	</dependencies>
 	<build>
@@ -46,7 +41,7 @@
 				<configuration>
 					<archive>
 						<manifestEntries>
-							<Automatic-Module-Name>org.ogc_schemas.filter.v_1_1_0</Automatic-Module-Name>
+							<Automatic-Module-Name>org.ogc_schemas.wfs.v_1_1_0</Automatic-Module-Name>
 						</manifestEntries>
 					</archive>
 				</configuration>
@@ -57,7 +52,7 @@
 				<configuration>
 					<schemas>
 						<schema>
-							<url>http://schemas.opengis.net/filter/1.1.0/filterAll.xsd</url>
+							<url>http://schemas.opengis.net/wfs/1.1.0/wfs.xsd</url>
 						</schema>
 					</schemas>
 					<bindings>
@@ -88,7 +83,11 @@
 						<configuration>
 							<target>
 								<delete dir="${basedir}/target/generated-sources/xjc/net/opengis/gml"/>
+								<delete dir="${basedir}/target/generated-sources/xjc/net/opengis/filter"/>
+								<delete dir="${basedir}/target/generated-sources/xjc/net/opengis/ows"/>
 								<delete dir="${basedir}/target/generated-sources/xjc" includes="GML*.*"/>
+								<delete dir="${basedir}/target/generated-sources/xjc" includes="Filter*.*"/>
+								<delete dir="${basedir}/target/generated-sources/xjc" includes="OWS*.*"/>
 							</target>
 						</configuration>
 						<goals>
