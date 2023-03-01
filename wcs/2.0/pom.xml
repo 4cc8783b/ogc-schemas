@@ -7,9 +7,9 @@
 	<name>OGC WCS 2.0</name>
 	<parent>
 		<groupId>org.ogc-schemas</groupId>
-		<artifactId>ogc-schema-parent</artifactId>
+		<artifactId>ogc-schema-parent-jaxb2</artifactId>
 		<version>4.1.0-SNAPSHOT</version>
-		<relativePath>../../schema-parent/pom.xml</relativePath>
+		<relativePath>../../schema-parent/jaxb2/pom.xml</relativePath>
 	</parent>
 	<dependencies>
 		<dependency>

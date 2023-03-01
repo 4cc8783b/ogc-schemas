@@ -7,9 +7,9 @@
 	<name>OGC KML 2.2.0</name>
 	<parent>
 		<groupId>org.ogc-schemas</groupId>
-		<artifactId>ogc-schema-parent</artifactId>
+		<artifactId>ogc-schema-parent-jaxb2</artifactId>
 		<version>4.1.0-SNAPSHOT</version>
-		<relativePath>../../schema-parent/pom.xml</relativePath>
+		<relativePath>../../schema-parent/jaxb2/pom.xml</relativePath>
 	</parent>
 	<dependencies>
 		<dependency>
@@ -21,6 +21,10 @@
 			<groupId>org.ogc-schemas</groupId>
 			<artifactId>xal-v_2_0</artifactId>
 			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.glassfish.jaxb</groupId>
+			<artifactId>jaxb-runtime</artifactId>
 		</dependency>
 	</dependencies>
 	<build>

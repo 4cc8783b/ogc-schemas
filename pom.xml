@@ -121,7 +121,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<jaxb2-basics.version>1.11.1</jaxb2-basics.version>
-		<jaxb.version>2.3.6</jaxb.version>
+		<jaxb2-runtime.version>2.3.6</jaxb2-runtime.version>
 		<maven-jaxb2-plugin.version>0.15.2</maven-jaxb2-plugin.version>
 		<w3c-schemas.version>2.1.0-SNAPSHOT</w3c-schemas.version>
 		<jsonix-schema-compiler.version>2.3.8</jsonix-schema-compiler.version>
@@ -130,6 +130,7 @@
 		<!-- JAXB 3 dependencies -->
 		<jakarta.xml.bind-api.version>4.0.0</jakarta.xml.bind-api.version>
 		<jaxb3-basics.version>0.15.0</jaxb3-basics.version>
+		<jaxb3-runtime.version>4.0.2</jaxb3-runtime.version>
 
 		<!-- plugin versions -->
 		<jaxb-maven-plugin.version>0.16.1</jaxb-maven-plugin.version>
@@ -178,12 +179,6 @@
 				<groupId>com.massfords</groupId>
 				<artifactId>jaxb-visitor</artifactId>
 				<version>3.0.0</version>
-			</dependency>
-			<dependency>
-				<groupId>org.glassfish.jaxb</groupId>
-				<artifactId>jaxb-runtime</artifactId>
-				<version>${jaxb.version}</version>
-				<scope>provided</scope>
 			</dependency>
 			<dependency>
 				<groupId>javax.xml.bind</groupId>

@@ -2,54 +2,70 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<artifactId>ogc-dtd-parent</artifactId>
+	<artifactId>ogc-schema-parent-jaxb3</artifactId>
 	<packaging>pom</packaging>
-	<name>OGC DTD Parent</name>
+	<name>OGC Schema Parent JAXB3</name>
 	<parent>
 		<groupId>org.ogc-schemas</groupId>
 		<artifactId>ogc-schemas-project</artifactId>
 		<version>4.1.0-SNAPSHOT</version>
+		<relativePath>../../pom.xml</relativePath>
 	</parent>
 	<dependencies>
 		<dependency>
-			<groupId>org.jvnet.jaxb2_commons</groupId>
-			<artifactId>jaxb2-basics-runtime</artifactId>
+			<groupId>jakarta.xml.bind</groupId>
+			<artifactId>jakarta.xml.bind-api</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>javax.xml.bind</groupId>
-			<artifactId>jaxb-api</artifactId>
+			<groupId>net.mcbluna.jaxb3_commons</groupId>
+			<artifactId>jaxb3-basics</artifactId>
 		</dependency>
 	</dependencies>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.glassfish.jaxb</groupId>
+				<artifactId>jaxb-runtime</artifactId>
+				<scope>provided</scope>
+				<version>${jaxb3-runtime.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.glassfish.jaxb</groupId>
+				<artifactId>jaxb-core</artifactId>
+				<scope>provided</scope>
+				<version>${jaxb3-runtime.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 	<build>
 		<defaultGoal>install</defaultGoal>
 		<pluginManagement>
 			<plugins>
 				<plugin>
-					<groupId>org.jvnet.jaxb2.maven2</groupId>
-					<artifactId>maven-jaxb2-plugin</artifactId>
+					<groupId>com.helger.maven</groupId>
+					<artifactId>jaxb30-maven-plugin</artifactId>
 					<executions>
 						<execution>
-							<id>sources</id>
 							<goals>
 								<goal>generate</goal>
 							</goals>
-						</execution>
-						<execution>
-							<id>scripts</id>
-							<goals>
-								<goal>generate</goal>
-							</goals>
-							<configuration>
-								<forceRegenerate>true</forceRegenerate>
-							</configuration>
 						</execution>
 					</executions>
 					<configuration>
 						<useDependenciesAsEpisodes>true</useDependenciesAsEpisodes>
 						<strict>false</strict>
 						<extension>true</extension>
-						<schemaLanguage>dtd</schemaLanguage>
 						<schemaIncludes/>
+						<bindings>
+							<binding>
+								<dependencyResource>
+									<groupId>${project.groupId}</groupId>
+									<artifactId>ogc-schemas</artifactId>
+									<resource>ogc/globalBindings.jaxb3.xjb</resource>
+									<version>${project.version}</version>
+								</dependencyResource>
+							</binding>
+						</bindings>
 						<catalogs>
 							<catalog>
 								<dependencyResource>
@@ -76,8 +92,8 @@
 								</dependencyResource>
 							</catalog>
 						</catalogs>
-
 						<args>
+							<arg>-XfixJAXB1058</arg>
 							<arg>-XtoString</arg>
 							<arg>-Xequals</arg>
 							<arg>-XhashCode</arg>
@@ -88,100 +104,31 @@
 							<arg>-Xinject-code</arg>
 							<arg>-Xinheritance</arg>
 							<arg>-Xfluent-api</arg>
-							<!--arg>-Xvisitor</arg-->
-							<arg>-Xjsonix</arg>
-							<arg>-Xjsonix-compact</arg>
-							<arg>-Xjsonix-generateJsonSchema</arg>
+							<arg>-Xannotate</arg>
 						</args>
 						<plugins>
-							<plugin>
-								<groupId>org.jvnet.jaxb2_commons</groupId>
-								<artifactId>jaxb2-basics</artifactId>
-							</plugin>
-							<plugin>
-								<groupId>org.jvnet.jaxb2_commons</groupId>
-								<artifactId>jaxb2-fluent-api</artifactId>
-							</plugin>
 							<dependency>
-								<groupId>org.hisrc.jsonix</groupId>
-								<artifactId>jsonix-schema-compiler</artifactId>
+								<groupId>net.java.dev.jaxb2-commons</groupId>
+								<artifactId>jaxb-fluent-api</artifactId>
+								<version>2.1.8</version>
+							</dependency>
+							<dependency>
+								<groupId>net.mcbluna.jaxb3_commons</groupId>
+								<artifactId>jaxb3-basics</artifactId>
+								<version>${jaxb3-basics.version}</version>
+							</dependency>
+							<dependency>
+								<groupId>org.patrodyne.jvnet</groupId>
+								<artifactId>hisrc-hyperjaxb-annox-plugin</artifactId>
+								<version>2.0.0</version>
 							</dependency>
 						</plugins>
 					</configuration>
 				</plugin>
 				<plugin>
-					<artifactId>maven-antrun-plugin</artifactId>
-					<executions>
-						<execution>
-							<id>package-scripts</id>
-							<phase>package</phase>
-							<configuration>
-								<target>
-									<zip basedir="${project.build.directory}/generated-sources/xjc" destfile="${project.build.directory}/${project.artifactId}-${project.version}-scripts.zip">
-										<patternset>
-											<include name="**/*.js"/>
-										</patternset>
-									</zip>
-								</target>
-							</configuration>
-							<goals>
-								<goal>run</goal>
-							</goals>
-						</execution>
-						<execution>
-							<id>package-jsonschemas</id>
-							<phase>package</phase>
-							<configuration>
-								<target>
-									<zip basedir="${project.build.directory}/generated-sources/xjc" destfile="${project.build.directory}/${project.artifactId}-${project.version}-jsonschemas.zip">
-										<patternset>
-											<include name="**/*.jsonschema"/>
-										</patternset>
-									</zip>
-								</target>
-							</configuration>
-							<goals>
-								<goal>run</goal>
-							</goals>
-						</execution>
-					</executions>
-				</plugin>
-				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
 					<artifactId>build-helper-maven-plugin</artifactId>
 					<executions>
-						<execution>
-							<id>attach-scripts</id>
-							<phase>package</phase>
-							<goals>
-								<goal>attach-artifact</goal>
-							</goals>
-							<configuration>
-								<artifacts>
-									<artifact>
-										<file>${project.build.directory}/${project.artifactId}-${project.version}-scripts.zip</file>
-										<type>zip</type>
-										<classifier>scripts</classifier>
-									</artifact>
-								</artifacts>
-							</configuration>
-						</execution>
-						<execution>
-							<id>attach-jsonschemas</id>
-							<phase>package</phase>
-							<goals>
-								<goal>attach-artifact</goal>
-							</goals>
-							<configuration>
-								<artifacts>
-									<artifact>
-										<file>${project.build.directory}/${project.artifactId}-${project.version}-jsonschemas.zip</file>
-										<type>zip</type>
-										<classifier>jsonschemas</classifier>
-									</artifact>
-								</artifacts>
-							</configuration>
-						</execution>
 						<execution>
 							<id>add-resource</id>
 							<phase>generate-resources</phase>
