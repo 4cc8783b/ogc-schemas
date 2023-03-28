@@ -8,7 +8,7 @@
 	<parent>
 		<groupId>org.ogc-schemas</groupId>
 		<artifactId>ogc-schema-parent-jaxb2</artifactId>
-		<version>4.1.0-SNAPSHOT</version>
+		<version>${revision}</version>
 		<relativePath>../../../schema-parent/jaxb2/pom.xml</relativePath>
 	</parent>
 	<dependencies>
@@ -68,25 +68,6 @@
 						</binding>
 					</bindings>
 				</configuration>
-			</plugin>
-			<plugin>
-				<artifactId>maven-antrun-plugin</artifactId>
-				<executions>
-					<execution>
-						<phase>process-sources</phase>
-						<configuration>
-							<target>
-								<!-- TODO -->
-								<!--delete dir="${basedir}/target/generated-sources/xjc/net/opengis/gml"/>
-								<delete dir="${basedir}/target/generated-sources/xjc/org/isotc211/_2005"/>
-								<delete dir="${basedir}/target/generated-sources/xjc" includes="org*.*"/-->
-							</target>
-						</configuration>
-						<goals>
-							<goal>run</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 			<plugin>
 				<artifactId>maven-antrun-plugin</artifactId>

@@ -3,3 +3,4 @@
 /err
 /std
 /target/
+/**/.flattened-pom.xml

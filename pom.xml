@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.ogc-schemas</groupId>
 	<artifactId>ogc-schemas-project</artifactId>
-	<version>4.1.0-SNAPSHOT</version>
+	<version>${revision}</version>
 	<packaging>pom</packaging>
 	<name>OGC Schemas Project</name>
 	<url>https://github.com/ogc-schemas/ogc-schemas</url>
@@ -119,6 +119,7 @@
 		</profile>
 	</profiles>
 	<properties>
+		<revision>4.1.0-SNAPSHOT</revision>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<jaxb2-basics.version>1.11.1</jaxb2-basics.version>
 		<jaxb2-runtime.version>2.3.6</jaxb2-runtime.version>
@@ -300,6 +301,28 @@
 					<artifactId>build-helper-maven-plugin</artifactId>
 					<version>3.3.0</version>
 				</plugin>
+				<plugin>
+					<!-- rewrite poms without parent and resolve properties -->
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>flatten-maven-plugin</artifactId>
+					<version>1.4.1</version>
+					<executions>
+						<execution>
+							<id>Remove flattened pom</id>
+							<goals>
+								<goal>clean</goal>
+							</goals>
+							<phase>clean</phase>
+						</execution>
+						<execution>
+							<id>Generate flattened pom</id>
+							<goals>
+								<goal>flatten</goal>
+							</goals>
+							<phase>prepare-package</phase>
+						</execution>
+					</executions>
+				</plugin>
 				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
 				<plugin>
 					<groupId>org.eclipse.m2e</groupId>
@@ -325,7 +348,7 @@
 										</goals>
 									</pluginExecutionFilter>
 									<action>
-										<ignore></ignore>
+										<ignore/>
 									</action>
 								</pluginExecution>
 								<pluginExecution>
@@ -344,7 +367,7 @@
 										</goals>
 									</pluginExecutionFilter>
 									<action>
-										<ignore></ignore>
+										<ignore/>
 									</action>
 								</pluginExecution>
 							</pluginExecutions>
@@ -353,5 +376,11 @@
 				</plugin>
 			</plugins>
 		</pluginManagement>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>flatten-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
 	</build>
 </project>

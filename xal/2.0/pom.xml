@@ -8,7 +8,7 @@
 	<parent>
 		<groupId>org.ogc-schemas</groupId>
 		<artifactId>ogc-schema-parent-jaxb2</artifactId>
-		<version>4.1.0-SNAPSHOT</version>
+		<version>${revision}</version>
 		<relativePath>../../schema-parent/jaxb2/pom.xml</relativePath>
 	</parent>
 	<build>

@@ -8,7 +8,7 @@
 	<parent>
 		<groupId>org.ogc-schemas</groupId>
 		<artifactId>wcs</artifactId>
-		<version>4.1.0-SNAPSHOT</version>
+		<version>${revision}</version>
 	</parent>
 	<modules>
 		<module>1.0</module>

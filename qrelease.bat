@@ -10,7 +10,7 @@ rem pause
 
 echo Setting new version to %1.
 rem pause
-call mvn versions:set -Pall -DnewVersion=%1
+call mvn versions:set-property -Dproperty=revision -DnewVersion=%1
 echo Version was set to %1.
 rem pause
 call mvn versions:commit -Pall
@@ -50,7 +50,7 @@ rem pause
 
 echo Setting new version to %2.
 rem pause
-call mvn versions:set -Pall -DnewVersion=%2
+call mvn versions:set-property -Dproperty=revision -DnewVersion=%2
 echo Version was set to %2.
 rem pause
 call mvn versions:commit -Pall

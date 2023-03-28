@@ -10,7 +10,7 @@ pause
 
 echo Setting new version to %1.
 pause
-call mvn versions:set -DnewVersion=%1
+call mvn versions:set-property -Dproperty=revision -DnewVersion=%1
 echo Version was set to %1.
 pause
 call mvn versions:commit
@@ -50,7 +50,7 @@ pause
 
 echo Setting new version to %2.
 pause
-call mvn versions:set -DnewVersion=%2
+call mvn versions:set-property -Dproperty=revision -DnewVersion=%2
 echo Version was set to %2.
 pause
 call mvn versions:commit
